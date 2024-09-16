@@ -2,6 +2,8 @@ import React from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 import {FaShoppingCart, FaUser} from 'react-icons/fa';
 import {LinkContainer} from 'react-router-bootstrap';
+import logo from "../assets/Logo.png"
+// import Image from 'react-bootstrap';
 
 
 const Header = () => {
@@ -10,7 +12,9 @@ const Header = () => {
       <Navbar bg='dark' variant='dark' expand='md'>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>GizmoGalaxy</Navbar.Brand>
+            <Navbar.Brand>
+              <img src={logo} alt="logo" />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav'/>
 

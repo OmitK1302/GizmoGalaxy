@@ -1,0 +1,16 @@
+Navbar.Toggle: ----------------------------------------------------------
+
+Navbar.Toggle is a component in Bootstrap used to create a collapsible navigation menu, 
+especially for smaller screen sizes. It renders a button that, when clicked, expands or collapses the navigation content.
+
+aria-controls:
+This is an ARIA attribute that indicates the ID of the element(s) that are controlled by the current element.
+
+basic-navbar-nav: This is the ID of the element that will be shown or hidden when the toggle button (with the aria-controls attribute) is clicked.
+
+
+
+
+
+
+
