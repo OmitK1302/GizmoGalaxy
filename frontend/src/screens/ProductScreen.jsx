@@ -1,14 +1,29 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import products from '../products'
+// import products from '../products'
 import { Row, Col, Image, Card, Button, ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import outOfStockImg from "../assets/outOfStock.png"
 
 const ProductScreen = () => {
+
+    const [product, setProduct] = useState({});
+
     const {id:productId} = useParams();
-    const product = products.find((p) => p._id === productId);
-    console.log(product);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await axios.get(`/api/products/${productId}`);
+            setProduct(data);
+        }
+
+        fetchData();
+    }, [productId]);
+    // const product = products.find((p) => p._id === productId);
+    // console.log(product);
     return (
         <>
             <Link to={'/'} className='btn btn-light my-3'>
@@ -67,6 +82,13 @@ const ProductScreen = () => {
                                 <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
                                     Add To Cart
                                 </Button>
+                                
+                                <>
+                                {product.countInStock === 0 && 
+                                    <Image src={outOfStockImg} alt='outOfStock image' fluid />
+                                }
+                                </>
+
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
