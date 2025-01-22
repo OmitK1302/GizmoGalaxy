@@ -8,22 +8,38 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import outOfStockImg from "../assets/outOfStock.png"
 
-const ProductScreen = () => {
 
+
+const ProductScreen = () => {
+    const [error, setError] = useState(null);
     const [product, setProduct] = useState({});
 
     const {id:productId} = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await axios.get(`/api/products/${productId}`);
-            setProduct(data);
+            try{
+                const { data } = await axios.get(`/api/products/${productId}`);
+                console.log(productId);
+                console.log(data);
+                setProduct(data);
+            }
+            catch(error){
+                setError(error.message);
+
+            }
+            // const { data } = await axios.get(`/api/products/${productId}`);
+            // setProduct(data);
         }
 
         fetchData();
     }, [productId]);
     // const product = products.find((p) => p._id === productId);
     // console.log(product);
+
+    if(error){
+        return <h2>{error}</h2>;
+    }
     return (
         <>
             <Link to={'/'} className='btn btn-light my-3'>
@@ -95,7 +111,7 @@ const ProductScreen = () => {
                 </Col>
             </Row>
         </>
-    )
+    );
 }
 
 export default ProductScreen
